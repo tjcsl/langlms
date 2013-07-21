@@ -17,3 +17,31 @@ class User(Base):
     def __repr__(self):
         return "<User {0}>".format(self.username)
 
+class Class(Base):
+    __tablename__ = "classes"
+    cid = Column(Integer, primary_key = True)
+    name = Column(String(512))
+    school = Column(String(512))
+
+    def __init__(self, name, school):
+        self.name = name
+        self.school = school
+
+    def __repr__(self):
+        return "<Class {0}>".format(self.name)
+
+class ClassRole(Base):
+    __tablename__ = "class_roles"
+    roleid = Column(Integer, primary_key = True)
+    cid = Column(Integer)
+    uid = Column(Integer)
+    role = Column(Integer)
+
+    def __init__(self, cid, uid, role):
+        self.cid = cid
+        self.uid = uid
+        self.role = role
+
+    def __repr__(self):
+        return "<ClassRole {0}>".format(self.role)
+

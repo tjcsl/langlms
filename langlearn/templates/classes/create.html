@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Create class{% endblock %}
+{% block content %}
+<div class="offset3 span6 well">
+    <form action="{{ url_for('create_class') }}" method="POST" class="text-center">
+        <h2>Create a class</h2>
+        <label for="name">Class name</label>
+        <input type="text" id="name" name="name" placeholder="Class name..." />
+        <br>
+        <label for="school">School</label>
+        <input type="text" id="school" name="school" placeholder="School..." />
+        <br>
+        <input type="submit" class="btn" value="Create class" />
+    </form>
+</div>
+{% endblock %}
+
