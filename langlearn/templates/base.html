@@ -38,7 +38,7 @@
                             {% for i in list_user_classes() %}
                             {% if user_is_teacher(i.cid) %}
                             <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ i.name }} <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ i.name }}</a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ url_for('edit_students', cid=i.cid) }}">Manage students</a></li>
                                 <li><a href="#">Manage assignments</a></li>
