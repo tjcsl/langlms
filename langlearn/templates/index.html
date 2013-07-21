@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-Hello, world!
+<div class="hero-unit">
+    <h1>Welcome to LangLearn.</h1>
+    Here, you can learn laguages.<br>
+    <a class="btn btn-large" href="{{ url_for('register') }}">Sign up</a>
+</div>
 {% endblock %}

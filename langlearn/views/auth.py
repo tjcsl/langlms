@@ -11,9 +11,11 @@ def login():
         if response:
             session["username"] = response[0]
             session["uid"] = response[1]
-            flash("Login successful.", "success")
+            flash("<i class='icon-ok-sign icon-white'></i>\
+                    Login success.", "success")
             return redirect(url_for("index"))
-        flash("Login failed!", "error")
+        flash("<i class='icon-remove-sign icon-white'></i>\
+                Login failed!", "error")
     return render_template("auth/login.html")
 
 def register():
@@ -22,7 +24,8 @@ def register():
                 request.form["username"],
                 request.form["password"]
                 )
-        flash("Account created. Please login.", "success")
+        flash("<i class='icon-ok-sign icon-white'></i>\
+                Account created. Please login.", "success")
         return render_template("auth/login.html")
     return render_template("auth/register.html")
 
@@ -30,8 +33,11 @@ def logout():
     if "username" in session or "uid" in session:
         if "username" in session: session.pop("username")
         if "uid" in session: session.pop("uid")
-        flash("Logged out.", "success")
+        flash("<i class='icon-ok-sign icon-white'></i>\
+                Logged out.", "success")
         return redirect(url_for("login"))
-    flash("You are already logged out!", "success")
+    flash("<i class='icon-ok-sign icon-white'></i>\
+            You are already logged out!", 
+            "success")
     return redirect(url_for("logout"))
         
