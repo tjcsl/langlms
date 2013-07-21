@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}User settings{% endblock %}
+{% block content %}
+You are a 
+{% if get_user_acl() == 0 %}
+<b>student</b>.
+{% elif get_user_acl() == 1 %}
+<b>teacher</b>.
+{% elif get_user_acl() == 2 %}
+<b>site administrator</b>.
+{% else %}
+<b>hacker</b>.
+{% endif %}
+{% endblock %}
+
+

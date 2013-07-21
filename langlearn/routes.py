@@ -17,7 +17,8 @@ add_views(
             '/': core.index,
             '/login/': auth.login,
             '/logout/': auth.logout,
-            '/register/': auth.register
+            '/register/': auth.register,
+            '/user/settings/': user.settings
             }
         )
 

@@ -27,9 +27,10 @@
                     <a class="brand" href="{{ url_for('index') }}">LangLearn</a>
                     <ul class="nav">
                         {% if not session.uid %}
-                        <li><a href="{{ url_for('login') }}">Login/Register</a></li>
+                        <li><a href="{{ url_for('login') }}"><i class="icon-user icon-white"></i>Login/Register</a></li>
                         {% else %}
-                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                        <li><a href="{{ url_for('logout') }}"><i class="icon-user icon-white"></i>Logout</a></li>
+                        <li><a href="{{ url_for('settings') }}"><i class="icon-wrench icon-white"></i>Settings</a></li>
                         {% endif %}
                     </ul>
                 </div>
