@@ -1,0 +1,17 @@
+from flask import Flask
+from langlearn.database import db_session
+import logging
+
+app = Flask(__name__)
+app.secret_key = "devel key"
+
+@app.teardown_request
+def shutdown_session(exception=None):
+    db_session.remove()
+
+@app.before_first_request
+def setup_logging():
+    app.logger.addHandler(logging.StreamHandler())
+    app.logger.setLevel(logging.DEBUG)
+
+import langlearn.routes
