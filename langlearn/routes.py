@@ -14,7 +14,10 @@ def add_views(views):
 
 add_views(
         {
-            '/': core.index 
+            '/': core.index,
+            '/login/': auth.login,
+            '/logout/': auth.logout,
+            '/register/': auth.register
             }
         )
 

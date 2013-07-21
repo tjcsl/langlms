@@ -26,6 +26,11 @@
                 <div class="container">
                     <a class="brand" href="{{ url_for('index') }}">LangLearn</a>
                     <ul class="nav">
+                        {% if not session.uid %}
+                        <li><a href="{{ url_for('login') }}">Login/Register</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

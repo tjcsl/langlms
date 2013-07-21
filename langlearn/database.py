@@ -8,7 +8,7 @@ engine = create_engine(
         convert_unicode = True
         )
 db_session = scoped_session(sessionmaker(
-    autocommit = True,
+    autocommit = False,
     autoflush = True,
     bind = engine
     )
