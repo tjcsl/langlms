@@ -2,5 +2,17 @@
 {% block title %}Class overview{% endblock %}
 {% block content %}
 <h2>{{ c.name }}</h2>
-<h3>{{ c.school }}</h3>
+{{ c.school }}<br>
+<h2>Members</h2>
+<table class="table table-striped table-bordered table-hover">
+    <tr>
+        <th>Username</th><th>Role</th>
+    </tr>
+    {% for i in list_class_members(c.cid) %}
+    <tr>
+        <td>{{ i.username }}</td>
+        <td>{% if user_is_teacher(c.cid, i.uid) %}Teacher{% else %}Student{% endif %}</td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock %}
