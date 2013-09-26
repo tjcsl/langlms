@@ -3,66 +3,68 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta charset="utf-8">
-        <style>
-          body {
-            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-          }
-        </style>
+            <style>
+                body {
+                    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+                }
+            </style>
 
-        <script src="{{ url_for('static', filename='jquery.js') }}"></script>
-        <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
-        <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet" />
-        <link href="{{ url_for('static', filename='bootstrap-responsive.min.css') }}" rel="stylesheet" />
-        <title>{% block title %}LangLearn{% endblock %}</title>
-    </head>
-    <body>
-        <script>
-            setTimeout(function() {
-                $(".alert").slideUp();
-            }, 3000);
-        </script>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="brand" href="{{ url_for('index') }}">LangLearn</a>
-                    <ul class="nav">
-                        {% if not session.uid %}
-                        <li><a href="{{ url_for('login') }}"><i class="icon-user icon-white"></i>Login/Register</a></li>
-                        {% else %}
-                        <li><a href="{{ url_for('logout') }}"><i class="icon-user icon-white"></i>Logout</a></li>
-                        <li><a href="{{ url_for('settings') }}"><i class="icon-wrench icon-white"></i>Settings</a></li>
-                        <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list icon-white"></i> Classes <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-header">Classes</li>
-                            {% for i in list_user_classes() %}
-                            {% if user_is_teacher(i.cid) %}
-                            <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ i.name }}</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ url_for('edit_students', cid=i.cid) }}">Manage students</a></li>
-                                <li><a href="#">Manage assignments</a></li>
-                                <li><a href="#">View scores</a></li>
-                                <li><a href="{{ url_for('class_overview', cid=i.cid) }}">Class overview</a></li>
-                            </ul>
-                            </li>
+            <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+            <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+            <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet" />
+            <link href="{{ url_for('static', filename='bootstrap-responsive.min.css') }}" rel="stylesheet" />
+            <title>{% block title %}LangLearn{% endblock %}</title>
+        </head>
+        <body>
+            <script>
+                setTimeout(function() {
+                    $(".alert").slideUp();
+                }, 3000);
+            </script>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="brand" href="{{ url_for('index') }}">LangLearn</a>
+                        <ul class="nav">
+                            {% if not session.uid %}
+                            <li><a href="{{ url_for('login') }}"><i class="icon-user icon-white"></i>Login/Register</a></li>
                             {% else %}
-                            <li><a href="{{ url_for('class_overview', cid=i.cid) }}">{{ i.name }}</a></li>
+                            <li><a href="{{ url_for('logout') }}"><i class="icon-user icon-white"></i>Logout</a></li>
+                            <li><a href="{{ url_for('settings') }}"><i class="icon-wrench icon-white"></i>Settings</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list icon-white"></i> Classes <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-header">Classes</li>
+                                    {% for i in list_user_classes() %}
+                                    {% if user_is_teacher(i.cid) %}
+                                    <li class="dropdown-submenu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ i.name }}</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ url_for('edit_students', cid=i.cid) }}">Manage students</a></li>
+                                            <li><a href="#">Manage documents</a></li>
+                                            <li><a href="{{ url_for('class_overview', cid=i.cid) }}">Class overview</a></li>
+                                        </ul>
+                                    </li>
+                                    {% else %}
+                                    <li><a href="{{ url_for('class_overview', cid=i.cid) }}">{{ i.name }}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% if get_user_acl() >= 1 %}
+                                    <li class="nav-header">Manage classes</li>
+                                    <li><a href="{{ url_for('create_class') }}">Create class</a></li>
+                                    <li><a href="#">List classes</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                            {% if get_user_acl() >= 2 %}
+                            <li><a href="#"><i class="icon-tasks icon-white"></i> Site management </a></li>
                             {% endif %}
-                            {% endfor %}
-                            {% if get_user_acl() >= 1 %}
-                            <li class="nav-header">Manage classes</li>
-                            <li><a href="{{ url_for('create_class') }}">Create class</a></li>
-                            <li><a href="#">List classes</a></li>
                             {% endif %}
                         </ul>
-                        </li>
-                        {% endif %}
-                    </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
+            <div class="container">
                 <div id="alerts">
                     {% for category, message in get_flashed_messages(with_categories=True) %}
                     <div class="alert alert-{{ category }} fade in">
@@ -70,10 +72,10 @@
                     </div>
                     {% endfor %}
                 </div>
-    
+
                 {% block content %}
                 {% endblock %}
-        </div> <!-- /container -->
-    </body>
-</html>
+            </div> <!-- /container -->
+        </body>
+    </html>
 
