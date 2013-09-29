@@ -2,6 +2,7 @@ from flask import session, flash
 from langlearn.models import Class, ClassRole, User
 from langlearn.database import db_session
 import langlearn
+import langlearn.auth
 
 def list_user_classes(uid=None):
     if uid is None:
@@ -48,7 +49,7 @@ def user_in_class(cid, uid=None):
     return False
 
 def user_is_teacher(cid, uid=None):
-    return get_user_role(cid, uid) == 1
+    return get_user_role(cid, uid) == 1 or langlearn.auth.get_user_acl() == 2
 
 def create_class(name, school, uid=None):
     if uid is None:
