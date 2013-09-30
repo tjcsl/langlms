@@ -43,6 +43,12 @@ def get_user_role(cid, uid=None):
             ClassRole.cid == cid).first().role
     except: return 0
 
+def set_user_role(cid, uid, role):
+    crole = ClassRole.query.filter(ClassRole.uid == uid,
+                           ClassRole.cid == cid).first()
+    crole.role = role
+    db_session.commit()
+
 def user_in_class(cid, uid=None):
     if uid is None:
         uid = session["uid"]

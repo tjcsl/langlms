@@ -23,6 +23,8 @@
         {% else %}
         Student
         {% endif %}
+        <a href="{{ url_for('make_student', cid=c.cid, uid=i.uid) }}" class="btn btn-mini btn-primary">Make student</a>
+        <a href="{{ url_for('make_teacher', cid=c.cid, uid=i.uid) }}" class="btn btn-mini btn-primary">Make teacher</a>
     </td>
     <td>
         <form action="{{ url_for('rm_student') }}" method="POST" style="margin: 0 0 0px">

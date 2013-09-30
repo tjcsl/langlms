@@ -1,8 +1,0 @@
-DROP TABLE IF EXISTS users;
-
-CREATE TABLE users(
-    uid serial,
-    username varchar(512) not null,
-    passwd_hash varchar(512) not null,
-    acl int default 0
-);

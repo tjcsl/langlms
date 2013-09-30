@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS user_settings;
+
+CREATE TABLE users (
+    uid INTEGER PRIMARY KEY AUTOINCREMENT,
+    username STRING NOT NULL,
+    passwd_hash STRING NOT NULL,
+    acl INT DEFAULT 0
+);
+
+CREATE TABLE user_settings (
+    sid INTEGER PRIMARY KEY AUTOINCREMENT,
+    uid INTEGER NOT NULL,
+    key STRING DEFAULT "",
+    value STRING DEFAULT ""
+);

@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS user_settings;
+
+CREATE TABLE user_settings (
+    sid INTEGER PRIMARY KEY AUTOINCREMENT,
+    uid INTEGER NOT NULL,
+    key STRING DEFAULT "",
+    value STRING DEFAULT ""
+);

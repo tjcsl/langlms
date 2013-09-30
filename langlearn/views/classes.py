@@ -49,3 +49,18 @@ def class_overview(cid):
     return render_template("classes/overview.html", 
             c=langlearn.classes.get_class(cid))
 
+def make_teacher(cid, uid):
+    if not langlearn.classes.user_is_teacher(cid):
+        flash("You do not have permission!", "error")
+        return redirect(url_for("index"))
+    langlearn.classes.set_user_role(cid, uid, 1)
+    flash("User set to teacher.", "success")
+    return redirect(url_for("edit_students", cid=cid))
+
+def make_student(cid, uid):
+    if not langlearn.classes.user_is_teacher(cid):
+        flash("You do not have permission!", "error")
+        return redirect(url_for("index"))
+    langlearn.classes.set_user_role(cid, uid, 0)
+    flash("User set to student.", "success")
+    return redirect(url_for("edit_students", cid=cid))

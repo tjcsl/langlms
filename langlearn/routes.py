@@ -29,6 +29,8 @@ add_views(
             '/class/students/<int:cid>/': classes.edit_students,
             '/class/students/add/': classes.add_student,
             '/class/students/del/': classes.rm_student,
+            '/class/roles/set/s/<int:cid>/<int:uid>/': classes.make_student,
+            '/class/roles/set/t/<int:cid>/<int:uid>/': classes.make_teacher,
             ##
             '/news/post/<int:cid>/': news.create_newspost,
             '/news/delete/<int:postid>/': news.delete_newspost,
