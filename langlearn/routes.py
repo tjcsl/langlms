@@ -20,6 +20,8 @@ add_views(
             '/logout/': auth.logout,
             '/register/': auth.register,
             ##
+            '/credits/': credits.render_credits,
+            ##
             '/user/settings/': user.settings,
             ##
             '/class/create/': classes.create_class,
