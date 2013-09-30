@@ -2,7 +2,12 @@
 {% block title %}Class overview{% endblock %}
 {% block content %}
 <h2>{{ c.name }}</h2>
-{{ c.school }}<br>
+<h3><i>{{ c.school }}</i></h3>
+<h2>News</h2>
+{% for i in newsposts_in_class(c.cid) %}
+<h3>{{ i.title }}{% if can_create_newspost(c.cid) %} <a href="{{ url_for('delete_newspost', postid=i.postid) }}"><small>(delete)</small></a> {% endif %}</h3> 
+<p>{{ i.content }}</p>
+{% endfor %}
 <h2>Members</h2>
 <table class="table table-striped table-bordered table-hover">
     <tr>
@@ -15,4 +20,5 @@
     </tr>
     {% endfor %}
 </table>
+
 {% endblock %}

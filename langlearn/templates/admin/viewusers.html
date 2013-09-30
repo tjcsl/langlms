@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}View users{% endblock %}
+{% block content %}
+<h2>Users</h2>
+<table class="table table-striped table-bordered table-hover">
+    <tr>
+        <th>Username</th><th>Set Permissions</th>
+    </tr>
+{% for i in users %}
+<tr>
+    <td>
+        {{ i.username }}
+    </td>
+    <td>
+        <a href="{{ url_for('set_user_student', uid=i.uid) }}" class="btn btn-mini btn-primary">Set student</a>
+        <a href="{{ url_for('set_user_teacher', uid=i.uid) }}" class="btn btn-mini btn-primary">Set teacher</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
+

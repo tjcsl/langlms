@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS classes;
+DROP TABLE IF EXISTS class_roles;
+
+CREATE TABLE classes (
+    cid INTEGER PRIMARY KEY AUTOINCREMENT,
+    name STRING NOT NULL,
+    school STRING NOT NULL
+ );
+
+ CREATE TABLE class_roles (
+    roleid INTEGER PRIMARY KEY AUTOINCREMENT,
+    cid INTEGER,
+    uid INTEGER,
+    role INTEGER
+);

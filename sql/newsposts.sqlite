@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS news_posts;
+
+CREATE TABLE news_posts (
+    postid INTEGER PRIMARY KEY AUTOINCREMENT,
+    cid INTEGER,
+    title STRING NOT NULL,
+    content STRING NOT NULL
+);

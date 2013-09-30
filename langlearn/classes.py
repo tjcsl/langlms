@@ -37,6 +37,8 @@ def rm_class_member(username, cid):
 def get_user_role(cid, uid=None):
     if uid is None:
         uid = session["uid"]
+    if langlearn.auth.get_user_acl(uid) == 2:
+        return 1
     try: return ClassRole.query.filter(ClassRole.uid == uid, 
             ClassRole.cid == cid).first().role
     except: return 0
@@ -49,7 +51,7 @@ def user_in_class(cid, uid=None):
     return False
 
 def user_is_teacher(cid, uid=None):
-    return get_user_role(cid, uid) == 1 or langlearn.auth.get_user_acl() == 2
+    return get_user_role(cid, uid) == 1
 
 def create_class(name, school, uid=None):
     if uid is None:

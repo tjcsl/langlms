@@ -42,7 +42,8 @@ def rm_student():
     return redirect(url_for("edit_students", cid=cid))
 
 def class_overview(cid):
-    if not langlearn.classes.user_in_class(cid):
+    if not langlearn.classes.user_in_class(cid) and \
+       not langlearn.classes.user_is_teacher(cid):
         flash("You do not have permission!", "error")
         return redirect(url_for("index"))
     return render_template("classes/overview.html", 

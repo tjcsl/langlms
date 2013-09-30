@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Create newspost{% endblock %}
+{% block content %}
+<div class="offset3 span6 well">
+    <form method="POST" class="text-center">
+        <h2>Create a newspost</h2>
+        <label for="title">Class name</label>
+        <input type="text" id="title" name="title" placeholder="Post title..." />
+        <br>
+        <label for="content">Content</label>
+        <textarea id="content" name="content" placeholder="Content..." rows="10" style="width:100%"></textarea>
+        <br>
+        <input type="submit" class="btn" value="Create newspost" />
+    </form>
+</div>
+{% endblock %}
+

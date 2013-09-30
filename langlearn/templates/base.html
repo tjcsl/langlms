@@ -13,7 +13,7 @@
             <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
             <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet" />
             <link href="{{ url_for('static', filename='bootstrap-responsive.min.css') }}" rel="stylesheet" />
-            <title>{% block title %}LangLearn{% endblock %}</title>
+            <title>{% block title %}Sullivan{% endblock %}</title>
         </head>
         <body>
             <script>
@@ -24,7 +24,7 @@
             <div class="navbar navbar-inverse navbar-fixed-top">
                 <div class="navbar-inner">
                     <div class="container">
-                        <a class="brand" href="{{ url_for('index') }}">LangLearn</a>
+                        <a class="brand" href="{{ url_for('index') }}">Sullivan</a>
                         <ul class="nav">
                             {% if not session.uid %}
                             <li><a href="{{ url_for('login') }}"><i class="icon-user icon-white"></i>Login/Register</a></li>
@@ -38,11 +38,11 @@
                                     {% for i in list_user_classes() %}
                                     {% if user_is_teacher(i.cid) %}
                                     <li class="dropdown-submenu">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ i.name }}</a>
+                                        <a href="{{ url_for('class_overview', cid=i.cid) }}" class="dropdown-toggle" data-toggle="dropdown">{{ i.name }}</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ url_for('edit_students', cid=i.cid) }}">Manage students</a></li>
-                                            <li><a href="#">Manage documents</a></li>
                                             <li><a href="{{ url_for('class_overview', cid=i.cid) }}">Class overview</a></li>
+                                            <li><a href="{{ url_for('edit_students', cid=i.cid) }}">Manage students</a></li>
+                                            <li><a href="{{ url_for('create_newspost', cid=i.cid) }}">Create a newspost</a></li>
                                         </ul>
                                     </li>
                                     {% else %}
@@ -52,12 +52,24 @@
                                     {% if get_user_acl() >= 1 %}
                                     <li class="nav-header">Manage classes</li>
                                     <li><a href="{{ url_for('create_class') }}">Create class</a></li>
-                                    <li><a href="#">List classes</a></li>
                                     {% endif %}
                                 </ul>
                             </li>
                             {% if get_user_acl() >= 2 %}
-                            <li><a href="#"><i class="icon-tasks icon-white"></i> Site management </a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-tasks icon-white"></i> Site management <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-header">User management</li>
+                                    <li><a href="{{ url_for('get_students') }}">List students</a></li>
+                                    <li><a href="{{ url_for('get_teachers') }}">List teachers</a></li>
+                                    <li><a href="{{ url_for('get_siteadmins') }}">List site administrators</a></li>
+                                    <li class="nav-header">Class management</li>
+                                    <li><a href="{{ url_for('get_classes') }}">List all classes</a></li>
+                                    <li><a href="{{ url_for('get_classes_no_teacher') }}">List classes without a teacher</a></li>
+                                    <li class="nav-header">Database management</li>
+                                    <li><a href="#">Query the database</a></li>
+                                </ul>
+                            </li>
                             {% endif %}
                             {% endif %}
                         </ul>

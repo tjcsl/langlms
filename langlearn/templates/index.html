@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="hero-unit">
-    <h1>Welcome to LangLearn.</h1>
-    Here, you can learn languages.<br>
-    <a class="btn btn-large" href="{{ url_for('register') }}">Sign up</a>
+    <h1>Welcome to Sullivan.</h1>
+    An education-oriented content management system<br>
+        {% if not session.uid %}
+            <a class="btn btn-large" href="{{ url_for('register') }}">Sign up</a>
+        {% endif %}
 </div>
 {% endblock %}

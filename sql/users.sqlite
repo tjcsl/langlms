@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    uid INTEGER PRIMARY KEY AUTOINCREMENT,
+    username STRING NOT NULL,
+    passwd_hash STRING NOT NULL,
+    acl INT DEFAULT 0
+);
