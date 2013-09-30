@@ -20,13 +20,16 @@ def login():
 
 def register():
     if request.method == "POST":
-        langlearn.auth.create_account(
+        if langlearn.auth.create_account(
                 request.form["username"],
                 request.form["password"]
-                )
-        flash("<i class='icon-ok-sign icon-white'></i>\
-                Account created. Please login.", "success")
-        return render_template("auth/login.html")
+                ):
+            flash("<i class='icon-ok-sign icon-white'></i>\
+                    Account created. Please login.", "success")
+            return render_template("auth/login.html")
+        else:
+            flash("Account creation failure, please try a different username."
+                  , "error")
     return render_template("auth/register.html")
 
 def logout():

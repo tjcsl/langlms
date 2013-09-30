@@ -14,10 +14,14 @@ def is_valid_login(username, password):
     return False
 
 def create_account(username, password):
+    usernames = [i.username for i in langlearn.models.User.query.all()]
+    if username in usernames or len(username) < 4: 
+        return False
     passwd_hash = hashlib.sha256(password).hexdigest()
     user = langlearn.models.User(username, passwd_hash)
     langlearn.database.db_session.add(user)
     langlearn.database.db_session.commit()
+    return True
    
 def get_user_acl(uid=None):
     if uid is None:
