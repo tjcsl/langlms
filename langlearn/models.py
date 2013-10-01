@@ -108,8 +108,8 @@ class StudentResponse(Base):
     mcanswer = Column(Integer)
     writinganswer = Column(String(8192))
 
-    def __init__(self, aid, uid, answer):
-        self.aid = aid
+    def __init__(self, itemid, uid, answer):
+        self.itemid = itemid
         self.uid = uid
         if isinstance(answer, int):
             self.mcanswer = answer
