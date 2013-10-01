@@ -2,7 +2,7 @@ import langlearn
 import langlearn.admin
 import langlearn.auth
 from langlearn.models import User, Class, ClassRole
-from flask import flash, redirect, url_for, render_template, request
+from flask import flash, redirect, url_for, render_template, request, session
 from functools import wraps
 
 
@@ -10,7 +10,10 @@ def require_admin(f):
     @wraps(f)
     def wrapped(*args, **kwargs):
         if langlearn.auth.get_user_acl() < 2:
-            flash("You do not have permissions to access admin functions!")
+            flash("You do not have permissions to access admin functions!"
+                , "error")
+            langlearn.app.logger.warning("Attempted access to admin functions\
+ by UID %s" % str(session["uid"]))
             return redirect(url_for("index"))
         return f(*args, **kwargs)
     return wrapped
