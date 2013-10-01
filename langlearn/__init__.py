@@ -1,9 +1,10 @@
 from flask import Flask
 from langlearn.database import db_session
 import logging
+import os
 
 app = Flask(__name__)
-app.secret_key = "devel key"
+app.secret_key = os.environ["SECRET_KEY"]
 
 @app.teardown_request
 def shutdown_session(exception=None):

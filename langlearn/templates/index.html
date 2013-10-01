@@ -4,7 +4,8 @@
     <h1>Welcome to Sullivan.</h1>
     An education-oriented content management system<br>
         {% if not session.uid %}
-            <a class="btn btn-large" href="{{ url_for('register') }}">Sign up</a>
+            <a class="btn btn-large btn-primary" href="{{ url_for('register') }}">Sign up</a>
+            <a class="btn btn-large btn-success" href="{{ url_for('login') }}">Login</a>
         {% endif %}
 </div>
 {% endblock %}
