@@ -101,6 +101,7 @@ class AssessmentItem(Base):
         return "<AssessmentItem {0}>".format(self.qtitle)
 
 class StudentResponse(Base):
+    __tablename__ = "assessment_responses"
     rid = Column(Integer, primary_key = True)
     uid = Column(Integer)
     aid = Column(Integer)
