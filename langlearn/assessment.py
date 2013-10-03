@@ -6,7 +6,7 @@ def create_assessment(cid, name):
     db_session.add(Assessment(cid, name))
     db_session.commit()
 
-def create_item(aid, qtype, qtitle, mc_answers=[], mc_correct=0):
+def create_item(aid, qtitle, qtype=1, mc_answers=[], mc_correct=0):
     db_session.add(AssessmentItem(aid, qtype, qtitle, mc_correct, *mc_answers))
     db_session.commit()
 
@@ -15,3 +15,5 @@ def student_response(itemid, answer, uid=None):
         uid = session["uid"]
     db_session.add(StudentResponse(itemid, uid, answer))
     db_session.commit()
+
+
