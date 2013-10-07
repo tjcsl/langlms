@@ -1,10 +1,10 @@
 from sqlalchemy import Column, Integer, String
 from database import Base
-import time
+
 
 class User(Base):
     __tablename__ = "users"
-    uid = Column(Integer, primary_key = True)
+    uid = Column(Integer, primary_key=True)
     username = Column(String(512))
     passwd_hash = Column(String(512))
     acl = Column(Integer)
@@ -17,9 +17,10 @@ class User(Base):
     def __repr__(self):
         return "<User {0}>".format(self.username)
 
+
 class Class(Base):
     __tablename__ = "classes"
-    cid = Column(Integer, primary_key = True)
+    cid = Column(Integer, primary_key=True)
     name = Column(String(512))
     school = Column(String(512))
 
@@ -30,9 +31,10 @@ class Class(Base):
     def __repr__(self):
         return "<Class {0}>".format(self.name)
 
+
 class ClassRole(Base):
     __tablename__ = "class_roles"
-    roleid = Column(Integer, primary_key = True)
+    roleid = Column(Integer, primary_key=True)
     cid = Column(Integer)
     uid = Column(Integer)
     role = Column(Integer)
@@ -45,9 +47,10 @@ class ClassRole(Base):
     def __repr__(self):
         return "<ClassRole {0}>".format(self.role)
 
+
 class NewsPost(Base):
     __tablename__ = "news_posts"
-    postid = Column(Integer, primary_key = True)
+    postid = Column(Integer, primary_key=True)
     cid = Column(Integer)
     title = Column(String(512))
     content = Column(String(4096))
@@ -60,9 +63,10 @@ class NewsPost(Base):
     def __repr__(self):
         return "<NewsPost {0}>".format(self.title)
 
+
 class Assessment(Base):
     __tablename__ = "assessments"
-    aid = Column(Integer, primary_key = True)
+    aid = Column(Integer, primary_key=True)
     cid = Column(Integer)
     name = Column(String(512))
 
@@ -73,9 +77,10 @@ class Assessment(Base):
     def __repr__(self):
         return "<Assessment {0}>".format(self.name)
 
+
 class AssessmentItem(Base):
     __tablename__ = "assessment_items"
-    itemid = Column(Integer, primary_key = True)
+    itemid = Column(Integer, primary_key=True)
     aid = Column(Integer)
     qtype = Column(Integer)  # Question type (0=mc,1=writing)
     qtitle = Column(String(2048))
@@ -91,7 +96,7 @@ class AssessmentItem(Base):
             while len(args) < 4:
                 args.append("")
             self.mcanswer0, self.mcanswer1, \
-            self.mcanswer2, self.mcanswer3 = args
+                self.mcanswer2, self.mcanswer3 = args
         self.mccorrect = mccorrect
         self.aid = aid
         self.qtype = qtype
@@ -100,9 +105,10 @@ class AssessmentItem(Base):
     def __repr__(self):
         return "<AssessmentItem {0}>".format(self.qtitle)
 
+
 class StudentResponse(Base):
     __tablename__ = "assessment_responses"
-    rid = Column(Integer, primary_key = True)
+    rid = Column(Integer, primary_key=True)
     uid = Column(Integer)
     aid = Column(Integer)
     mcanswer = Column(Integer)

@@ -4,19 +4,24 @@ from sqlalchemy.ext.declarative import declarative_base
 import os
 
 engine = create_engine(
-        os.environ['DATABASE_URL'],
-        convert_unicode = True
-        )
+    os.environ['DATABASE_URL'],
+    convert_unicode=True
+    )
 db_session = scoped_session(sessionmaker(
-    autocommit = False,
-    autoflush = True,
-    bind = engine
+    autocommit=False,
+    autoflush=True,
+    bind=engine
     )
     )
 
 Base = declarative_base()
 Base.query = db_session.query_property()
 
+
 def init_db():
+    """
+    Initialize the database.
+    """
     import langlearn.models
-    Base.metadata.create_all(bind = engine)
+    langlearn.models
+    Base.metadata.create_all(bind=engine)
