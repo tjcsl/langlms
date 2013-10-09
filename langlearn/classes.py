@@ -133,4 +133,7 @@ def inject_funcs():
                 get_user_role=get_user_role,
                 user_is_teacher=user_is_teacher,
                 list_user_classes=list_user_classes,
-                list_class_members=list_class_members)
+                get_class=get_class,
+                list_class_members=list_class_members,
+                enumerate=enumerate  # You don't see this.
+                )

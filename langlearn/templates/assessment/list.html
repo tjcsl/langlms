@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Assessment list</h1>
+{% if show_teacher %}
+<a href="{{ url_for('create_assessment', cid=cid) }}">Create new assessment</a><br />
+{% endif %}
+{% for a in assessments %}
+<b>{{ a.name }}</b>:
+{% if show_teacher %}
+<a href="{{ url_for('edit_assessment', aid=a.aid) }}">Edit</a>
+{% endif %}
+<a href="{{ url_for('render_assessment', aid=a.aid) }}">Take assessment</a>
+<br />
+{% endfor %}
+{% endblock %}

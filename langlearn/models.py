@@ -65,7 +65,7 @@ class NewsPost(Base):
 
 
 class Assessment(Base):
-    __tablename__ = "assessments"
+    __tablename__ = "assessment"
     aid = Column(Integer, primary_key=True)
     cid = Column(Integer)
     name = Column(String(512))
@@ -91,7 +91,7 @@ class AssessmentItem(Base):
     mcanswer3 = Column(String(512))
     mccorrect = Column(Integer)
 
-    def __init__(self, aid, qtype, qtitle, mccorrect=0, *args):
+    def __init__(self, aid, qtype, qtitle, args, mccorrect):
         if qtype == 0:
             while len(args) < 4:
                 args.append("")
@@ -104,6 +104,11 @@ class AssessmentItem(Base):
 
     def __repr__(self):
         return "<AssessmentItem {0}>".format(self.qtitle)
+
+    def get_mc_answers(self):
+        a = (self.mcanswer0, self.mcanswer1, self.mcanswer2, self.mcanswer3)
+        a = [i for i in a if i != ""]
+        return a
 
 
 class StudentResponse(Base):

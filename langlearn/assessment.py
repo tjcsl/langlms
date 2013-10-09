@@ -1,4 +1,5 @@
 from flask import session
+import langlearn
 from langlearn.models import Assessment, AssessmentItem, StudentResponse
 from langlearn.database import db_session
 
@@ -8,8 +9,10 @@ def create_assessment(cid, name):
     Create an assessment. Takes a class ID to assosciate the assessment with,
     as well as a name for the assessment.
     """
-    db_session.add(Assessment(cid, name))
+    a = Assessment(cid, name)
+    db_session.add(a)
     db_session.commit()
+    return a.aid
 
 
 def create_item(aid, qtitle, qtype=1, mc_answers=[], mc_correct=0):
@@ -19,7 +22,8 @@ def create_item(aid, qtitle, qtype=1, mc_answers=[], mc_correct=0):
     multiple choice, 1 == writing), and, iff this is multiple choice, a list
     of answers and an index of the correct answer.
     """
-    db_session.add(AssessmentItem(aid, qtype, qtitle, mc_correct, *mc_answers))
+    print aid, qtitle, qtype, mc_answers, mc_correct
+    db_session.add(AssessmentItem(aid, qtype, qtitle, mc_answers, mc_correct))
     db_session.commit()
 
 
@@ -35,6 +39,13 @@ def student_response(itemid, answer, uid=None):
     db_session.commit()
 
 
+def get_questions(aid):
+    """
+    Return a list of AssessmentItems in the assessment with the given ID.
+    """
+    return AssessmentItem.query.filter(AssessmentItem.aid == aid).all()
+
+
 def get_available_assessments(cid):
     """
     Return a list of the available assessments in a class. Takes a class ID.
@@ -47,3 +58,15 @@ def get_assessment(aid):
     Return an Assessment object given an assessment ID.
     """
     return Assessment.query.filter(Assessment.aid == aid).first()
+
+
+@langlearn.app.context_processor
+def inject_funcs():
+    """
+    Inject functions for use in templates.
+    """
+    return dict(
+        get_available_assessments=get_available_assessments,
+        get_questions=get_questions,
+        get_assessment=get_assessment
+        )
