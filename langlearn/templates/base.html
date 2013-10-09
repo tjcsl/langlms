@@ -44,6 +44,7 @@
                                             <li><a href="{{ url_for('class_overview', cid=i.cid) }}">Class overview</a></li>
                                             <li><a href="{{ url_for('edit_students', cid=i.cid) }}">Manage students</a></li>
                                             <li><a href="{{ url_for('create_newspost', cid=i.cid) }}">Create a newspost</a></li>
+                                            <li><a href="{{ url_for('list_assessments', cid=i.cid) }}">Manage assessments</a></li>
                                         </ul>
                                     </li>
                                     {% else %}

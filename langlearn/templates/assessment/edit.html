@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ assessment.name }}</h1>
+<h2><a href="{{ url_for('list_assessments', cid=assessment.cid) }}">{{ get_class(assessment.cid).name }}</a></h2>
+<hr />
+{% for item in get_questions(assessment.aid) %}
+<b>{{ item.qtitle }}</b> <i>{% if item.qtype %}Writing{% else %}Multiple choice{% endif %}</i> <a href="#">Edit</a> <a href="#">Delete</a><br />
+{% endfor %}<br />
+Create new
+<a href="{{ url_for('add_question', aid=assessment.aid, qtype=0) }}">multiple choice</a> |
+<a href="{{ url_for('add_question', aid=assessment.aid, qtype=1) }}">writing</a>
+question<br />
+<a href="#">Delete assessment</a>
+{% endblock %}

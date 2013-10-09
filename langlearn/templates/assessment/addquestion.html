@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Edit question</h1>
+<form action="" method="POST">
+<label for="qtitle">Question title</label>
+<input type="text" id="qtitle" name="qtitle" />
+<br /><br />
+{% if qtype == 0 %}
+    {% for i in range(4) %}
+    <span class="form-inline">
+        <label class="radio">
+            <input name="mccorrect" type="radio" value="{{ i }}" />
+            <input type="text" name="mcanswer{{ i }}" />
+        </label>
+    </span>
+    <br /><br />
+    {% endfor %}
+{% else %}
+<small><i>a writing space will appear here</i></small><br />
+{% endif %}
+<input type="submit" class="btn btn-primary" value="Create question" />
+</form>
+{% endblock %}

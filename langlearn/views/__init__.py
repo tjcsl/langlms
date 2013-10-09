@@ -1,4 +1,5 @@
 import admin
+import assessment
 import auth
 import classes
 import core
