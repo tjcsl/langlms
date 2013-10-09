@@ -135,5 +135,6 @@ def inject_funcs():
                 list_user_classes=list_user_classes,
                 get_class=get_class,
                 list_class_members=list_class_members,
-                enumerate=enumerate  # You don't see this.
+                enumerate=enumerate,  # You don't see this.
+                str=str  # Nor this.
                 )

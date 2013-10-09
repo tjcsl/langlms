@@ -47,8 +47,11 @@ add_views(
         ##
         '/assessment/<int:aid>/': assessment.render_assessment,
         '/assessment/create/<int:cid>/': assessment.create_assessment,
+        '/assessment/delete/<int:aid>/': assessment.delete_assessment,
         '/assessment/edit/<int:aid>/': assessment.edit_assessment,
         '/assessment/additem/<int:qtype>/<int:aid>/': assessment.add_question,
+        '/assessment/edititem/<int:itemid>/': assessment.edit_question,
+        '/assessment/delitem/<int:itemid>/': assessment.delete_question,
         '/assessment/list/<int:cid>/': assessment.list_assessments
         }
     )

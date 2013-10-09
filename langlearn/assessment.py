@@ -60,6 +60,13 @@ def get_assessment(aid):
     return Assessment.query.filter(Assessment.aid == aid).first()
 
 
+def get_item(itemid):
+    """
+    Return an AssessmentItem object given an item ID.
+    """
+    return AssessmentItem.query.filter(AssessmentItem.itemid == itemid).first()
+
+
 @langlearn.app.context_processor
 def inject_funcs():
     """
