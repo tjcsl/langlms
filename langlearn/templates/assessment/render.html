@@ -1,24 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
+<script>
+    function save_answer(type, itemid){
+        $("#button-" + itemid).button("loading");
+        if(type == 0){
+            var answer = $("input[name='mc-" + itemid + "']:checked").data("index");
+        }
+        else{
+            var answer = $("#writing-" + itemid).val();
+        }
+        console.log(answer);
+        $.post("{{ url_for('accept_response') }}", {"itemid": itemid, "answer": answer}, function(){$("#button-"+itemid).button('reset');});
+    }
+</script>
 <h1>{{ assessment.name }}</h1>
 <h2>{{ get_class(assessment.cid).name }}</h2>
 <hr />
 {% for item in get_questions(assessment.aid) %}
+    <button id="button-{{ item.itemid }}" 
+            class="pull-right btn btn-success" 
+            data-loading-text="Saving..."
+            onclick="save_answer({{ item.qtype }}, {{ item.itemid }});">Save question</button>
     <i>{{ item.qtitle }}</i>
     <br />
     {% if item.qtype == 0 %}
         {% for index, value in enumerate(item.get_mc_answers()) %}
         <span class="form-inline">
             <label class="radio">
-                <input name="mc-{{ item.itemid }}" type="radio" value="{{ index }}" id="mc-{{ item.itemid }}-{{ index }}"/>
+                <input name="mc-{{ item.itemid }}" type="radio" value="{{ index }}" id="mc-{{ item.itemid }}-{{ index }}" data-index="{{ index }}" />
                 {{ value }}
             </label>
         </span>
         <br />
         {% endfor %}
     {% else %}
-    <textarea rows="10" style="width:50%" name="writing-{{ item.itemid }}"></textarea>
+    <textarea rows="10" style="width:50%" id="writing-{{ item.itemid }}"></textarea>
     {% endif %}
-    <br />
+    <hr />
 {% endfor %}
 {% endblock %}

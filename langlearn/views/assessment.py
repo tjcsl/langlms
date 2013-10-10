@@ -114,3 +114,9 @@ def delete_question(itemid):
     db_session.delete(item)
     db_session.commit()
     return redirect(url_for("edit_assessment", aid=aid))
+
+
+def accept_response():
+    itemid = request.form["itemid"]
+    langlearn.assessment.student_response(itemid, request.form["answer"])
+    return "OK", 200

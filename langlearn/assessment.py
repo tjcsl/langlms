@@ -35,8 +35,18 @@ def student_response(itemid, answer, uid=None):
     """
     if uid is None:
         uid = session["uid"]
+    current = StudentResponse.query.filter(StudentResponse.itemid == itemid,
+                                           StudentResponse.uid == uid).first()
+    if current:
+        db_session.delete(current)
     db_session.add(StudentResponse(itemid, uid, answer))
     db_session.commit()
+
+
+def get_response(itemid, uid):
+    item = StudentResponse.query.filter(StudentResponse.itemid == itemid,
+                                        StudentResponse.uid == uid).first()
+    return item
 
 
 def get_questions(aid):
@@ -67,6 +77,21 @@ def get_item(itemid):
     return AssessmentItem.query.filter(AssessmentItem.itemid == itemid).first()
 
 
+def grade_assessment(aid, uid=None):
+    """
+    Return a student's percent score on a given assessment.
+    """
+    if uid is None:
+        uid = session["uid"]
+    questions = [q for q in get_questions(aid) if q.qtype == 0]
+    try:
+        correct = [i for i in questions if i.qtype == 0 and
+                   get_response(i.itemid, uid).mcanswer == i.mccorrect]
+    except:
+        return "Test not completed"
+    return str(int(100*(float(len(correct)) / len(questions)))) + "%"
+
+
 @langlearn.app.context_processor
 def inject_funcs():
     """
@@ -75,5 +100,6 @@ def inject_funcs():
     return dict(
         get_available_assessments=get_available_assessments,
         get_questions=get_questions,
-        get_assessment=get_assessment
+        get_assessment=get_assessment,
+        grade_assessment=grade_assessment
         )

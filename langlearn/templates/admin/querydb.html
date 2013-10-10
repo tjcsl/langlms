@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if query %}
+<table class="sortable table table-bordered table-rounded table-hover">
+    {% for i in query._metadata.keys %}<th>{{ i }}</th>{% endfor %}
+    {% for row in query %}
+    <tr>
+        {% for i in query._metadata.keys %}<td>{{ row[i] }}</td>{% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+<form action="" method="POST" class="form-inline span12">
+    <input id="autofocus" type="text" name="query" placeholder="Query..." class="span11" />
+    <input class="btn btn-primary" value="Query" type="submit"/>
+</form>
+{% endblock %}

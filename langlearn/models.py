@@ -115,17 +115,18 @@ class StudentResponse(Base):
     __tablename__ = "assessment_responses"
     rid = Column(Integer, primary_key=True)
     uid = Column(Integer)
-    aid = Column(Integer)
+    itemid = Column(Integer)
     mcanswer = Column(Integer)
     writinganswer = Column(String(8192))
 
     def __init__(self, itemid, uid, answer):
         self.itemid = itemid
         self.uid = uid
-        if isinstance(answer, int):
+        try:
+            int(answer)
             self.mcanswer = answer
             self.writinganswer = ""
-        else:
+        except:
             self.mcanswer = 0
             self.writinganswer = answer
 

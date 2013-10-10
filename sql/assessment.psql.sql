@@ -20,7 +20,7 @@ CREATE TABLE assessment_items (
     mccorrect INTEGER DEFAULT 0
 );
 
-CREATE TABLE assessments_responses (
+CREATE TABLE assessment_responses (
     rid serial,
     uid INTEGER NOT NULL,
     itemid INTEGER NOT NULL,

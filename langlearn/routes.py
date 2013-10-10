@@ -44,6 +44,7 @@ add_views(
         '/admin/users/setteacher/<int:uid>/': admin.set_user_teacher,
         '/admin/classes/all/': admin.get_classes,
         '/admin/classes/noteacher/': admin.get_classes_no_teacher,
+        '/admin/querydb/': admin.query_db,
         ##
         '/assessment/<int:aid>/': assessment.render_assessment,
         '/assessment/create/<int:cid>/': assessment.create_assessment,
@@ -52,6 +53,7 @@ add_views(
         '/assessment/additem/<int:qtype>/<int:aid>/': assessment.add_question,
         '/assessment/edititem/<int:itemid>/': assessment.edit_question,
         '/assessment/delitem/<int:itemid>/': assessment.delete_question,
-        '/assessment/list/<int:cid>/': assessment.list_assessments
+        '/assessment/list/<int:cid>/': assessment.list_assessments,
+        '/assessment/submit/': assessment.accept_response
         }
     )
